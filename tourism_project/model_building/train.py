@@ -32,6 +32,8 @@ numeric_features = [
     'NumberOfTrips',
     'PitchSatisfactionScore',
     'NumberOfChildrenVisiting',
+    'Passport',
+    'OwnCar',
     'MonthlyIncome'
 ]
 categorical_features = [
@@ -40,8 +42,6 @@ categorical_features = [
     'Gender',
     'ProductPitched',
     'MaritalStatus',
-    'Passport',
-    'OwnCar',
     'Designation'
 ]
 
@@ -72,7 +72,7 @@ model_pipeline = make_pipeline(preprocessor, xgb_model)
 # Start MLflow run
 with mlflow.start_run():
     # Hyperparameter tuning
-    grid_search = GridSearchCV(model_pipeline, param_grid, cv=5, scoring="recall", n_jobs=-1)
+    grid_search = GridSearchCV(model_pipeline, param_grid, cv=5, n_jobs=-1)
     grid_search.fit(Xtrain, ytrain)
 
     # Log all parameter combinations and their mean test scores
